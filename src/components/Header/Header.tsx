@@ -6,6 +6,7 @@ import style from './style';
 type PropType = {
   title: string;
   type: number;
+  color: string;
 };
 
 const Header = (props: PropType) => {
@@ -25,13 +26,17 @@ const Header = (props: PropType) => {
 
   return (
     <View>
-      <Text style={headerStyle()}>{props.title}</Text>
+      <Text style={[headerStyle(), props.color && {color: props.color}]}>
+        {props.title}
+      </Text>
     </View>
   );
 };
 
 Header.default = {
   title: '',
+  type: 1,
+  color: '#000',
 };
 
 export default Header;
