@@ -6,6 +6,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 type PropType = {
   onSearch: (searchValue: string) => void;
+  placeHolder: string;
 };
 
 const Search = (props: PropType) => {
@@ -24,6 +25,7 @@ const Search = (props: PropType) => {
     <Pressable style={style.searchInputContainer} onPress={handleFocus}>
       <FontAwesomeIcon icon={faSearch} color="#25c0ff" size={22} />
       <TextInput
+        placeholder={props.placeHolder}
         onChangeText={value => handleSearch(value)}
         ref={textInpurRef}
         style={style.searchInput}
@@ -32,8 +34,11 @@ const Search = (props: PropType) => {
   );
 };
 
-Search.default = {
+const defaultProps: PropType = {
   onSearch: () => {},
+  placeHolder: 'Search',
 };
+
+Search.defaultProps = defaultProps;
 
 export default Search;

@@ -33,10 +33,12 @@ const Header = (props: PropType) => {
   );
 };
 
-Header.default = {
+const defaultProps: PropType = {
   title: '',
   type: 1,
   color: '#000',
 };
+
+Header.defaultProps = defaultProps;
 
 export default Header;
