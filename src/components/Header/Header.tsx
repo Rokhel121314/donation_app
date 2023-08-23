@@ -7,6 +7,7 @@ type PropType = {
   title: string;
   type: number;
   color: string;
+  numberOfLines?: number;
 };
 
 const Header = (props: PropType) => {
@@ -26,7 +27,9 @@ const Header = (props: PropType) => {
 
   return (
     <View>
-      <Text style={[headerStyle(), props.color && {color: props.color}]}>
+      <Text
+        style={[headerStyle(), props.color && {color: props.color}]}
+        numberOfLines={props.numberOfLines ? props.numberOfLines : undefined}>
         {props.title}
       </Text>
     </View>

@@ -7,7 +7,8 @@ import {horizontalScale} from '../../../assets/styles/scaling';
 type PropType = {
   title: string;
   inActive: boolean;
-  onPress: () => void;
+  tabId: number;
+  onPress: (props: number) => void;
 };
 
 const Button = (props: PropType) => {
@@ -19,9 +20,8 @@ const Button = (props: PropType) => {
   };
   return (
     <Pressable
-      disabled={props.inActive}
       style={[style.tab, props.inActive && style.inActiveTab, tabWidth]}
-      onPress={() => props.onPress()}>
+      onPress={() => props.onPress(props.tabId)}>
       <Text
         onTextLayout={e => {
           setWidth(e.nativeEvent.lines[0].width);
@@ -34,9 +34,13 @@ const Button = (props: PropType) => {
   );
 };
 
-Button.default = {
+const defaultProps: PropType = {
+  title: 'item',
   inActive: false,
+  tabId: 1,
   onPress: () => {},
 };
+
+Button.defaultProps = defaultProps;
 
 export default Button;
