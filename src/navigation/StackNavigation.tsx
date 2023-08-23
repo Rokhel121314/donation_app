@@ -5,13 +5,26 @@ import {Routes} from './Route';
 
 // screens
 import Home from '../screens/Home/Home';
+import Donation from '../screens/Donation/Donation';
+import {RootStackParamList} from './navigationType';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const StackNavigation = () => {
   return (
-    <Stack.Navigator screenOptions={{header: () => null, headerShown: false}}>
-      <Stack.Screen name={Routes.Home} component={Home} />
+    <Stack.Navigator
+    //  screenOptions={{header: () => null, headerShown: false}}
+    >
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{header: () => null}}
+      />
+      <Stack.Screen
+        name="Donation"
+        component={Donation}
+        options={{headerTitle: () => null}}
+      />
     </Stack.Navigator>
   );
 };

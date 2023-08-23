@@ -21,11 +21,16 @@ import Tab from '../../components/Tab/Tab';
 import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
 
 import usePagination from '../../hooks/usePagination';
-import {resetDonations} from '../../redux/reducers/Donation';
+import {
+  resetDonations,
+  setSelectedDonationInformation,
+} from '../../redux/reducers/Donation';
 import {DonationItemType} from '../../datas/donationItems';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
+import type {RootStackScreenProps} from '../../navigation/navigationType';
 
-const Home = () => {
+const Home = ({navigation}: RootStackScreenProps<'Home'>) => {
+  //
   const user = useSelector((state: RootState) => state.user);
   const categories = useSelector((state: RootState) => state.categories);
   const donations = useSelector((state: RootState) => state.donations);
@@ -39,7 +44,7 @@ const Home = () => {
 
   const [donationItems, setDonationItems] = useState<DonationItemType[]>();
 
-  console.log('donationItems', donationItems);
+  // console.log('donationItems', donationItems);
 
   useEffect(() => {
     const items = donations.items.filter(value =>
@@ -118,7 +123,10 @@ const Home = () => {
                   donationTitle={value.name}
                   donationItemId={value.donationItemId}
                   onPress={selectedDonationId => {
-                    console.log(selectedDonationId);
+                    dispatch(
+                      setSelectedDonationInformation(selectedDonationId),
+                    );
+                    navigation.navigate('Donation');
                   }}
                 />
               </View>

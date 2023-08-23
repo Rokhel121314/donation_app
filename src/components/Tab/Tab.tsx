@@ -11,7 +11,7 @@ type PropType = {
   onPress: (props: number) => void;
 };
 
-const Button = (props: PropType) => {
+const Tab = (props: PropType) => {
   const [width, setWidth] = useState(0);
   const textRef = useRef(null);
   const horizontalPadding = 33;
@@ -41,6 +41,6 @@ const defaultProps: PropType = {
   onPress: () => {},
 };
 
-Button.defaultProps = defaultProps;
+Tab.defaultProps = defaultProps;
 
-export default Button;
+export default Tab;
