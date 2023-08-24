@@ -35,7 +35,7 @@ const Donation = ({navigation}: RootStackScreenProps<'Donation'>) => {
       style={[globalStyle.bgWhite, globalStyle.flex, style.mainContainer]}>
       <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
       <ScrollView>
-        <View>
+        <View style={style.backBtnContainer}>
           <BackButton onPress={() => navigation.goBack()} />
         </View>
         {/* IMAGE */}
@@ -46,8 +46,8 @@ const Donation = ({navigation}: RootStackScreenProps<'Donation'>) => {
         {/* BADGE */}
         <View style={style.badgeContainer}>
           {categoryBadge.map(value => (
-            <View style={style.badgeWrapper}>
-              <Badge title={value.name} size="large" key={value.categoryId} />
+            <View style={style.badgeWrapper} key={value.categoryId}>
+              <Badge title={value.name} size="large" />
             </View>
           ))}
         </View>

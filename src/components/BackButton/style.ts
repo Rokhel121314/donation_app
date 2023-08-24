@@ -7,7 +7,6 @@ const style = StyleSheet.create({
     width: horizontalScale(44),
     borderRadius: horizontalScale(26),
     marginTop: verticalScale(7),
-    marginLeft: horizontalScale(21),
     backgroundColor: '#FAFAFA',
     justifyContent: 'center',
     alignItems: 'center',

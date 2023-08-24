@@ -48,6 +48,9 @@ const style = StyleSheet.create({
     marginBottom: verticalScale(20),
     backgroundColor: '#fff',
   },
+  backBtnContainer: {
+    marginHorizontal: horizontalScale(20),
+  },
 });
 
 export default style;
