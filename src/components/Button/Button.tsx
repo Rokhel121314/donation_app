@@ -18,10 +18,11 @@ const Button = (props: PropType) => {
     </Pressable>
   );
 };
-
-Button.default = {
-  isDisable: false,
+const defaultProps = {
+  isDisabled: false,
   onPress: () => {},
 };
+
+Button.defaultProps = defaultProps;
 
 export default Button;
