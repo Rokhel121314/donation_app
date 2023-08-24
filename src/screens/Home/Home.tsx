@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   FlatList,
+  StatusBar,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
@@ -55,6 +56,7 @@ const Home = ({navigation}: RootStackScreenProps<'Home'>) => {
 
   return (
     <SafeAreaView style={[globalStyle.bgWhite, globalStyle.flex]}>
+      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* HEADER */}
         <View style={style.header}>
