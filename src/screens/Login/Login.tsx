@@ -15,17 +15,33 @@ import {RootStackScreenProps} from '../../navigation/navigationType';
 import Input from '../../components/Input/Input';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
+import {loginUser} from '../../api/firebase/user';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../redux/store';
+import {login, resetToInitialState} from '../../redux/reducers/User';
 
 const Login = ({navigation, route}: RootStackScreenProps<'Login'>) => {
   //
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log('email', email);
-  console.log('password', password);
+  const [error, setError] = useState('');
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleLogin = async () => {
+    const user = await loginUser(email, password);
+    if (!user.data) {
+      setError(user.error);
+    } else {
+      setError('');
+      dispatch(login(user.data));
+      navigation.navigate('Home');
+    }
+  };
 
   return (
     <SafeAreaView style={[globalStyle.bgWhite, globalStyle.flex]}>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar barStyle={'dark-content'} backgroundColor={'#fff'} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={style.container}>
@@ -49,14 +65,12 @@ const Login = ({navigation, route}: RootStackScreenProps<'Login'>) => {
             onChangeText={value => setPassword(value)}
           />
         </View>
+        {error.length > 0 && <Text style={style.error}>{error}</Text>}
         <View style={globalStyle.marginBottom24}>
           <Button
             title={'Login'}
-            isDisabled={false}
-            onPress={() => {
-              {
-              }
-            }}
+            isDisabled={email.length <= 2 || password.length <= 5}
+            onPress={() => handleLogin()}
           />
         </View>
         <Pressable

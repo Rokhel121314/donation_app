@@ -14,8 +14,21 @@ const Register = ({navigation}: RootStackScreenProps<'Register'>) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  console.log('detail', fullName, email, password);
+  const handleRegister = async () => {
+    const user = await createUser(fullName, email, password);
+    if (user?.error) {
+      setError(user.error);
+    } else {
+      setError('');
+      setSuccess('You have successfully registered');
+      setTimeout(() => {
+        navigation.goBack();
+      }, 3000);
+    }
+  };
 
   return (
     <SafeAreaView style={[globalStyle.bgWhite, globalStyle.flex]}>
@@ -53,12 +66,17 @@ const Register = ({navigation}: RootStackScreenProps<'Register'>) => {
               onChangeText={text => setPassword(text)}
             />
           </View>
+          {error.length > 0 && <Text style={style.error}>{error}</Text>}
+          {success.length > 0 && <Text style={style.success}>{success}</Text>}
           <View style={globalStyle.marginBottom24}>
             <Button
+              isDisabled={
+                fullName.length <= 2 ||
+                email.length <= 5 ||
+                password.length <= 0
+              }
               title="Register"
-              onPress={async () => {
-                await createUser(fullName, email, password);
-              }}
+              onPress={() => handleRegister()}
             />
           </View>
         </View>
