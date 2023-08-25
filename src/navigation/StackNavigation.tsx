@@ -12,17 +12,24 @@ import Register from '../screens/Register/Register';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const StackNavigation = () => {
+export const PublicScreens = () => {
   return (
     <Stack.Navigator
       screenOptions={{header: () => null, headerShown: false}}
       initialRouteName="Login">
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Donation" component={Donation} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 };
 
-export default StackNavigation;
+export const PrivateScreens = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{header: () => null, headerShown: false}}
+      initialRouteName="Home">
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Donation" component={Donation} />
+    </Stack.Navigator>
+  );
+};
