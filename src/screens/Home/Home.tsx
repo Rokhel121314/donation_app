@@ -29,6 +29,8 @@ import {
 import {DonationItemType} from '../../datas/donationItems';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
 import type {RootStackScreenProps} from '../../navigation/navigationType';
+import {resetToInitialState} from '../../redux/reducers/User';
+import {logout} from '../../api/firebase/user';
 
 const Home = ({navigation}: RootStackScreenProps<'Home'>) => {
   //
@@ -44,8 +46,6 @@ const Home = ({navigation}: RootStackScreenProps<'Home'>) => {
   const {loadMoreData, dataList} = usePagination(categories.categories);
 
   const [donationItems, setDonationItems] = useState<DonationItemType[]>();
-
-  console.log('user', user.token);
 
   useEffect(() => {
     const items = donations.items.filter(value =>
@@ -66,7 +66,16 @@ const Home = ({navigation}: RootStackScreenProps<'Home'>) => {
               <Header title={user.displayName + ' ' + ' 👋'} />
             </View>
           </View>
-          <Image source={{uri: user.uri}} style={style.profileImage} />
+          <View>
+            <Image source={{uri: user.uri}} style={style.profileImage} />
+            <Pressable
+              onPress={async () => {
+                dispatch(resetToInitialState());
+                await logout();
+              }}>
+              <Header title={'Logout'} type={3} color={'#156cf7'} />
+            </Pressable>
+          </View>
         </View>
 
         {/* SEARCH BOX */}
